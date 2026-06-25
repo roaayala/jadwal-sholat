@@ -28,3 +28,21 @@ export const getUserApproximatelyLocation = async () => {
     throw error;
   }
 };
+
+export const getCityId = async (city) => {
+  try {
+    const url = `https://api.myquran.com/v3/sholat/kabkota/cari/${city}`;
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Kota tidak ditemukan");
+    }
+
+    const data = await response.json();
+
+    return data.data[0].id;
+  } catch (error) {
+    throw error;
+  }
+};

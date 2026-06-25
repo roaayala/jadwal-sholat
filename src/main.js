@@ -1,26 +1,29 @@
 import "./style.css";
 import van from "vanjs-core";
-import { getUserApproximatelyLocation } from "./utils/api";
+import { getCityId, getUserApproximatelyLocation } from "./utils/api";
 
 const { h1 } = van.tags;
 
 const App = () => {
   const userLocation = van.state({});
+  const cityId = van.state("");
 
-  getUserApproximatelyLocation()
-    .then((user) => {
+  const getVisitorInfo = async () => {
+    try {
+      const user = await getUserApproximatelyLocation();
       userLocation.val = user;
-    })
-    .catch((error) => {
-      userLocation.val = error;
-    });
 
-  return h1(
-    {
-      class: "font-bold",
-    },
-    "Hello",
-  );
+      const id = await getCityId(user.city);
+      cityId.val = id;
+    } catch (error) {
+      console.log(error);
+      cityId.val = "Kabupaten/Kota ga ketemu nih";
+    }
+  };
+
+  getVisitorInfo();
+
+  return h1({ class: "font-bold" }, () => cityId.val);
 };
 
 van.add(document.getElementById("app"), App());
