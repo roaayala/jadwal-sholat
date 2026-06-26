@@ -1,13 +1,6 @@
 import "./style.css";
-import van from "vanjs-core";
-import Footer from "./components/Footer.js";
-import Header from "./components/Header.js";
-import Main from "./components/Main.js";
+import { getCity } from "./utils/api";
 
-const { main } = van.tags;
+const app = document.getElementById("app");
 
-const App = () => {
-  return [Header(), Main(), Footer()];
-};
-
-van.add(document.getElementById("app"), App());
+getCity().then((data) => console.log(data));
