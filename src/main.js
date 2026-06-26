@@ -1,6 +1,4 @@
 import "./style.css";
-import { getCity } from "./utils/api";
+import { getCity, getCityId } from "./utils/api";
 
 const app = document.getElementById("app");
-
-getCity().then((data) => console.log(data));
