@@ -1,10 +1,13 @@
 import "./style.css";
 import van from "vanjs-core";
+import Footer from "./components/Footer.js";
+import Header from "./components/Header.js";
+import Main from "./components/Main.js";
 
-const { h1 } = van.tags;
+const { main } = van.tags;
 
 const App = () => {
-  return h1({ class: "font-bold" }, "Hello");
+  return [Header(), Main(), Footer()];
 };
 
 van.add(document.getElementById("app"), App());
