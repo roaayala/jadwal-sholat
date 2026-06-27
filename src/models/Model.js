@@ -1,5 +1,5 @@
-export const createLocation = ({ cityId, city, province }) => {
-  return { cityId, city, province };
+export const createLocation = ({ cityId, city, province, country }) => {
+  return { cityId, city, province, country };
 };
 
 export const createSchedule = ({
