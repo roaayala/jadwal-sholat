@@ -7,10 +7,11 @@ export const createSchedule = ({
   fajr,
   sunrise,
   dhuhr,
+  asr,
   maghrib,
   isha,
 }) => {
-  return { date, fajr, sunrise, dhuhr, maghrib, isha };
+  return { date, fajr, sunrise, dhuhr, maghrib, asr, isha };
 };
 
 export const createMonthlySchedule = (arr) => {

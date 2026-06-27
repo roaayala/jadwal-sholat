@@ -1,3 +1,5 @@
+import { createLocation, createSchedule } from "../models/Model";
+
 export const getVisitorApproximatelyLocation = async () => {
   // output city
   try {
@@ -45,10 +47,45 @@ export const getCityId = async (city) => {
   }
 };
 
-export const getSchedule = async (cityId) => {
+export const getSchedules = async (cityId) => {
   // output VisitorInfo object
+  try {
+    const todayReq = fetch(
+      `https://api.myquran.com/v3/sholat/jadwal/${cityId}/today`,
+    );
+
+    const monthlyReq = fetch(
+      `https://api.myquran.com/v3/sholat/jadwal/${cityId}/${currentMonth}`,
+    );
+
+    const data = await response.json();
+
+    const visitorLocation = createLocation({
+      cityId: data.data.id,
+      city: data.data.kabko,
+      province: data.data.prov,
+      country: "Indonesia",
+    });
+
+    const today = Object.values(data.data.jadwal)[0];
+
+    const todaySchedules = createSchedule({
+      date: today.tanggal,
+      fajr: today.subuh,
+      sunrise: today.terbit,
+      dhuhr: today.dzuhur,
+      asr: today.ashar,
+      maghrib: today.maghrib,
+      isha: today.isya,
+    });
+
+    return { location: visitorLocation, schedules: { today: todaySchedules } };
+  } catch (err) {
+    throw err;
+  }
 };
 
 getVisitorApproximatelyLocation()
   .then((crudeLocation) => getCityId(crudeLocation))
-  .then((city) => console.log(city));
+  .then((cityId) => getSchedules(cityId))
+  .then((data) => console.log(data));
