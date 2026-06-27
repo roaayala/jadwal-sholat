@@ -5,19 +5,7 @@ export default function createUI(state) {
   const app = document.getElementById("app");
 
   const render = () => {
-    if (state.isLoading) {
-      console.log("Loading...");
-      return;
-    }
-
-    if (state.errorMessage) {
-      console.log(state.errorMessage);
-      return;
-    }
-
-    if (state.data) {
-      console.log(state.data);
-    }
+    app.innerHTML = "";
 
     const main = createMain(state);
 

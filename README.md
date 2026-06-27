@@ -2,5 +2,5 @@
 
 ## Credits:
 
-1. [EQuran.id](https://equran.id/apidev/shalat) for providing prayer schedules data.
+1. [myQuran](https://api.myquran.com/v3/doc) for providing prayer schedules data.
 2. [IPWHOIS.IO](https://ipwhois.io/) for identifying visitor location.
