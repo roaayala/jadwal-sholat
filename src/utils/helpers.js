@@ -5,3 +5,17 @@ export const getCurrentMonthString = () => {
 
   return `${year}-${month}`;
 };
+
+export const capitalizeLetter = (text) => {
+  if (!text) return "";
+
+  return text
+    .toLowerCase()
+    .split(" ")
+    .map((word) => {
+      if (!word) return "";
+
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+};

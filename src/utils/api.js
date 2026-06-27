@@ -106,8 +106,3 @@ export const getSchedules = async (cityId) => {
     throw err;
   }
 };
-
-getVisitorApproximatelyLocation()
-  .then((crudeLocation) => getCityId(crudeLocation))
-  .then((cityId) => getSchedules(cityId))
-  .then((data) => console.log(data));
