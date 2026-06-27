@@ -80,28 +80,37 @@ export const getSchedules = async (cityId) => {
     const today = Object.values(todayData.data.jadwal)[0];
 
     const todaySchedules = createSchedule({
-      date: today.tanggal,
-      fajr: today.subuh,
+      date: Object.keys(todayData.data.jadwal)[0],
+      dawn: today.subuh,
       sunrise: today.terbit,
-      dhuhr: today.dzuhur,
-      asr: today.ashar,
-      maghrib: today.maghrib,
-      isha: today.isya,
+      noon: today.dzuhur,
+      afternoon: today.ashar,
+      dusk: today.maghrib,
+      evening: today.isya,
     });
 
-    const monthlySchedules = Object.values(monthlyData.data.jadwal).map((s) =>
-      createSchedule({
-        date: s.tanggal,
-        fajr: s.subuh,
-        sunrise: s.terbit,
-        dhuhr: s.dzuhur,
-        asr: s.ashar,
-        maghrib: s.maghrib,
-        isha: s.isya,
-      }),
+    const monthlySchedules = Object.values(monthlyData.data.jadwal).map(
+      (s, i) =>
+        createSchedule({
+          date: Object.keys(monthlyData.data.jadwal)[i],
+          dawn: s.subuh,
+          sunrise: s.terbit,
+          noon: s.dzuhur,
+          afternoon: s.ashar,
+          dusk: s.maghrib,
+          evening: s.isya,
+        }),
     );
 
-    return createVisitorInfo(visitorLocation, todaySchedules, monthlySchedules);
+    const visitorInfo = createVisitorInfo(
+      visitorLocation,
+      todaySchedules,
+      monthlySchedules,
+    );
+
+    console.log(visitorInfo);
+
+    return visitorInfo;
   } catch (err) {
     throw err;
   }

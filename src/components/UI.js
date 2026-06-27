@@ -7,11 +7,11 @@ export default function createUI(state) {
   const render = () => {
     app.innerHTML = "";
 
-    const main = createMain(state);
+    // const main = createMain(state);
 
-    const footer = createFooter();
+    // const footer = createFooter();
 
-    app.append(main, footer);
+    // app.append(main, footer);
   };
 
   return { render };

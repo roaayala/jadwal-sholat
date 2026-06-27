@@ -4,14 +4,24 @@ export const createLocation = ({ cityId, city, province, country }) => {
 
 export const createSchedule = ({
   date,
-  fajr,
+  dawn,
   sunrise,
-  dhuhr,
-  asr,
-  maghrib,
-  isha,
+  noon,
+  afternoon,
+  dusk,
+  evening,
 }) => {
-  return { date, fajr, sunrise, dhuhr, maghrib, asr, isha };
+  return {
+    date,
+    times: [
+      { id: "dawn", name: "Subuh", time: dawn },
+      { id: "sunrise", name: "Terbit", time: sunrise },
+      { id: "noon", name: "Zuhur", time: noon },
+      { id: "afternoon", name: "Ashar", time: afternoon },
+      { id: "dusk", name: "Maghrib", time: dusk },
+      { id: "evening", name: "Isya", time: evening },
+    ],
+  };
 };
 
 export const createVisitorInfo = (locData, todayData, monthlyData) => {
