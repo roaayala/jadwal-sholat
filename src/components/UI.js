@@ -3,6 +3,7 @@ import createMain from "./Main";
 
 export default function createUI(state) {
   const app = document.getElementById("app");
+  app.className = "flex flex-col min-h-screen";
 
   const render = () => {
     app.innerHTML = "";
