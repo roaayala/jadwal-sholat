@@ -6,12 +6,17 @@ export const getVisitorApproximatelyLocation = async () => {
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error("Kabupaten atau kota ngga ketemu nih " + response.status);
+      throw new Error("Can't detect your location automatically");
     }
 
     const data = await response.json();
 
-    return data;
+    // fallback
+    if (!data.success || data.country !== "Indonesia") {
+      return { city: "Jakarta", country: "Indonesia" };
+    }
+
+    return { city: data.city, country: data.country };
   } catch (err) {
     throw err;
   }
