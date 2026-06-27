@@ -14,21 +14,12 @@ export const createSchedule = ({
   return { date, fajr, sunrise, dhuhr, maghrib, asr, isha };
 };
 
-export const createMonthlySchedule = (arr) => {
-  if (!Array.isArray(arr)) return [];
-
-  return arr.map((day) => createSchedule(day));
-};
-
 export const createVisitorInfo = (locData, todayData, monthlyData) => {
-  const today = createSchedule(todayData);
-  const monthly = createMonthlySchedule(monthlyData);
-
   return {
     location: createLocation(locData),
     schedules: {
-      today,
-      monthly,
+      today: todayData,
+      monthly: monthlyData,
     },
   };
 };
