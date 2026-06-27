@@ -108,8 +108,6 @@ export const getSchedules = async (cityId) => {
       monthlySchedules,
     );
 
-    console.log(visitorInfo);
-
     return visitorInfo;
   } catch (err) {
     throw err;

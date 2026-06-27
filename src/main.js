@@ -25,7 +25,6 @@ const init = async () => {
     state.data = visitorInfo;
     state.isLoading = false;
   } catch (err) {
-    console.error(err);
     state.errorMessage = err.message;
     state.isLoading = false;
   } finally {

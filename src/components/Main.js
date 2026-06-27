@@ -10,6 +10,7 @@ export default function createMain(state) {
 
   if (state.errorMessage) {
     main.textContent = state.errorMessage;
+
     return main;
   }
 
@@ -20,15 +21,24 @@ export default function createMain(state) {
   mainLeading.className = "block";
   mainLeading.textContent = `${capitalizeLetter(state.data.location.city)}, ${capitalizeLetter(state.data.location.province)}, ${capitalizeLetter(state.data.location.country)}`;
 
-  console.log(state.data);
-
   const scheduleBoard = document.createElement("div");
 
   const todaySchedules = document.createElement("ul");
-  const todayList = document.createElement("li");
-  todayList.textContent = `Subuh ${state.data.schedules.today.fajr}`;
 
-  todaySchedules.append(todayList);
+  state.data.schedules.today.times.forEach((prayer) => {
+    const todayList = document.createElement("li");
+
+    const name = document.createElement("span");
+    name.textContent = prayer.name;
+
+    const time = document.createElement("span");
+    time.textContent = prayer.time;
+
+    todayList.append(name, time);
+
+    todaySchedules.append(todayList);
+  });
+
   scheduleBoard.append(todaySchedules);
 
   main.append(mainHeading, mainLeading, scheduleBoard);
