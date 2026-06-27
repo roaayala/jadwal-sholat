@@ -1,8 +1,11 @@
 import { capitalizeLetter } from "../utils/helpers";
+import { format, parseISO } from "date-fns";
+import { id } from "date-fns/locale";
 
 export default function createMain(state) {
   const main = document.createElement("main");
-  main.className = "flex-1 flex flex-col items-center justify-center px-4 ";
+  main.className =
+    "flex-1 flex flex-col items-center justify-center gap-4 px-4 ";
 
   if (state.isLoading) {
     main.textContent = "Loading...";
@@ -19,11 +22,11 @@ export default function createMain(state) {
   mainHeader.className = "w-full";
 
   const mainHeading = document.createElement("h1");
-  mainHeading.className = "text-2xl px-4";
-  mainHeading.textContent = `Jadwal Sholat: ${capitalizeLetter(state.data.schedules.today.date)} `;
+  mainHeading.className = "text-2xl";
+  mainHeading.textContent = `Jadwal Sholat: ${format(parseISO(state.data.schedules.today.date), "EEEE, dd MMMM yyyy", { locale: id })}`;
 
   const mainLeading = document.createElement("p");
-  mainLeading.className = "px-4";
+  mainLeading.className = "";
   mainLeading.textContent = `${capitalizeLetter(state.data.location.city)}, ${capitalizeLetter(state.data.location.province)}, ${capitalizeLetter(state.data.location.country)}`;
 
   mainHeader.append(mainHeading, mainLeading);
@@ -32,12 +35,12 @@ export default function createMain(state) {
   scheduleBoard.className = "w-full";
 
   const todaySchedules = document.createElement("ul");
-  todaySchedules.className = "flex justify-between gap-2";
+  todaySchedules.className = "flex flex-col gap-2";
 
   state.data.schedules.today.times.forEach((prayer) => {
     const todayList = document.createElement("li");
     todayList.className =
-      "flex-1 flex flex-col items-center justify-center text-center p-2";
+      "flex flex-row justify-between border border-black border-solid rounded-lg px-4 py-2 font-bold";
 
     const name = document.createElement("span");
     name.textContent = prayer.name;
