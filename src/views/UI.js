@@ -1,7 +1,7 @@
 import createFooter from "./Footer";
 import createMain from "./Main";
 
-export default function createUI({ state, onSearchFn }) {
+export default function createUI({ state, onSearchInput }) {
   const app = document.getElementById("app");
   app.className = "flex flex-col min-h-screen";
 
@@ -10,8 +10,8 @@ export default function createUI({ state, onSearchFn }) {
 
     const main = createMain({
       state,
-      onSearchFn: (e) => {
-        onSearchFn(e);
+      onSearchInput: (e) => {
+        onSearchInput(e);
       },
     });
 

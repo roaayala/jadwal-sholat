@@ -11,21 +11,23 @@ const state = {
   isLoading: true,
   data: null,
   errorMessage: null,
+  suggestions: null,
 };
 
 const UI = createUI({
   state,
-  onSearchFn: async (e) => {
+  onSearchInput: async (e) => {
     const keyword = e.target.value.trim();
 
-    if (!keyword) return;
-
-    try {
-      const searchResult = await searchCities(keyword);
-      console.log(searchResult);
-    } catch (err) {
-    } finally {
+    if (!keyword) {
+      state.suggestions = null;
+      UI.render();
+      return;
     }
+
+    const cities = await searchCities(keyword);
+    state.suggestions = cities;
+    UI.render();
   },
 });
 

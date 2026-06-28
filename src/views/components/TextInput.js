@@ -5,7 +5,7 @@ export default function createTextInput({
   placeholder,
   className = "",
   value = "",
-  onSearchFn,
+  onSearchInput,
 }) {
   const textInput = document.createElement("input");
 
@@ -16,7 +16,7 @@ export default function createTextInput({
   if (value) textInput.value = value;
 
   const debouncedSearch = debounce((e) => {
-    onSearchFn(e);
+    onSearchInput(e);
   }, 500);
 
   textInput.addEventListener("input", (e) => {
