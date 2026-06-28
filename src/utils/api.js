@@ -113,3 +113,17 @@ export const getSchedules = async (cityId) => {
     throw err;
   }
 };
+
+export const searchCities = async (keyword) => {
+  try {
+    const url = `https://api.myquran.com/v3/sholat/kabkota/cari/${keyword}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!data.status) return [];
+
+    return data.data;
+  } catch (err) {
+    throw err;
+  }
+};

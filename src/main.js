@@ -3,6 +3,7 @@ import {
   getCityId,
   getSchedules,
   getVisitorApproximatelyLocation,
+  searchCities,
 } from "./utils/api";
 import createUI from "./views/UI";
 
@@ -20,20 +21,10 @@ const UI = createUI({
     if (!keyword) return;
 
     try {
-      state.isLoading = true;
-      UI.render();
-
-      const cityId = await getCityId(keyword);
-
-      const visitorInfo = await getSchedules(cityId);
-
-      state.data = visitorInfo;
-      state.errorMessage = null;
+      const searchResult = await searchCities(keyword);
+      console.log(searchResult);
     } catch (err) {
-      state.errorMessage = "Lokasi kamu ga ketemu nih";
     } finally {
-      state.isLoading = false;
-      UI.render();
     }
   },
 });
