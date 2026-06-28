@@ -38,6 +38,8 @@ const UI = createUI({
     try {
       const visitorInfo = await getSchedules(cityId);
       state.data = visitorInfo;
+
+      localStorage.setItem("saved_city_id", cityId);
     } catch (err) {
       state.errorMessage = err.message;
     } finally {
@@ -57,11 +59,17 @@ const init = async () => {
   UI.render();
 
   try {
-    const crudeLocation = await getVisitorApproximatelyLocation();
+    const savedCityId = localStorage.getItem("saved_city_id");
+    let targetCityId;
 
-    const cityId = await getCityId(crudeLocation);
+    if (savedCityId) {
+      targetCityId = savedCityId;
+    } else {
+      const crudeLocation = await getVisitorApproximatelyLocation();
+      targetCityId = await getCityId(crudeLocation);
+    }
 
-    const visitorInfo = await getSchedules(cityId);
+    const visitorInfo = await getSchedules(targetCityId);
 
     state.data = visitorInfo;
     state.isLoading = false;
