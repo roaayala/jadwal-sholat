@@ -18,14 +18,16 @@ export default function createSearchBar({
     className: "",
     value: "",
     onSearchInput: (keyword) => {
-      onSearchInput(keyword);
+      onSearchInput(keyword.toLowerCase());
     },
   });
 
   const searchButton = createButton({
     text: "Search",
     onClickFn: () => {
-      onSearchInput(document.getElementById("citySearch").value.trim());
+      onSearchInput(
+        document.getElementById("citySearch").value.trim().toLowerCase(),
+      );
     },
   });
 
