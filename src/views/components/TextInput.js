@@ -3,7 +3,7 @@ export default function createTextInput({
   placeholder,
   className = "",
   value = "",
-  searchFn,
+  onSearchFn,
 }) {
   const textInput = document.createElement("input");
 
