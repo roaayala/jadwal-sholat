@@ -1,7 +1,12 @@
 import createFooter from "./Footer";
 import createMain from "./Main";
 
-export default function createUI({ state, onSearchInput, onSelectCity }) {
+export default function createUI({
+  state,
+  onSearchInput,
+  onSelectCity,
+  onDissmissSearch,
+}) {
   const app = document.getElementById("app");
   app.className = "flex flex-col min-h-screen";
 
@@ -22,6 +27,15 @@ export default function createUI({ state, onSearchInput, onSelectCity }) {
 
     app.append(main, footer);
   };
+
+  document.addEventListener("click", (e) => {
+    if (state.suggestions !== null) {
+      if (!e.target.closest("#search-container")) {
+        console.log("click");
+        onDissmissSearch();
+      }
+    }
+  });
 
   return { render };
 }

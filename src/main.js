@@ -46,6 +46,11 @@ const UI = createUI({
       UI.render();
     }
   },
+
+  onDissmissSearch: () => {
+    state.suggestions = null;
+    UI.render();
+  },
 });
 
 const init = async () => {

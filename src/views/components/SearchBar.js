@@ -8,6 +8,7 @@ export default function createSearchBar({
   onSelectCity,
 }) {
   const searchBar = document.createElement("div");
+  searchBar.id = "search-container";
   searchBar.className = "w-full relative";
 
   const searchInputGroup = document.createElement("div");
@@ -27,7 +28,7 @@ export default function createSearchBar({
   const searchButton = createButton({
     text: "Cari",
     className:
-      "px-4 py-2 text-white bg-green-600 border rounded-lg border-green-600",
+      "px-4 py-2 text-white bg-green-600 hover:bg-green-700 border rounded-lg border-green-600 hover:border-green-700 cursor-pointer",
     onClickFn: () => {
       onSearchInput(
         document.getElementById("citySearch").value.trim().toLowerCase(),
