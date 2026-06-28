@@ -1,3 +1,5 @@
+import { ar } from "date-fns/locale";
+
 export const getCurrentMonthString = () => {
   const today = new Date();
   const year = today.getFullYear();
@@ -18,4 +20,16 @@ export const capitalizeLetter = (text) => {
       return word.charAt(0).toUpperCase() + word.slice(1);
     })
     .join(" ");
+};
+
+export const debounce = (fn, delay = 500) => {
+  let timeoutId;
+
+  return (...args) => {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
 };
