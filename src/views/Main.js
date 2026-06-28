@@ -1,6 +1,7 @@
 import { capitalizeLetter } from "../utils/helpers";
 import { format, parseISO } from "date-fns";
 import { id } from "date-fns/locale";
+import createSearchBar from "./components/SearchBar";
 
 export default function createMain(state) {
   const main = document.createElement("main");
@@ -17,6 +18,8 @@ export default function createMain(state) {
 
     return main;
   }
+
+  const searchBar = createSearchBar();
 
   const mainHeader = document.createElement("header");
   mainHeader.className = "w-full";
@@ -55,7 +58,7 @@ export default function createMain(state) {
 
   scheduleBoard.append(todaySchedules);
 
-  main.append(mainHeader, scheduleBoard);
+  main.append(searchBar, mainHeader, scheduleBoard);
 
   return main;
 }

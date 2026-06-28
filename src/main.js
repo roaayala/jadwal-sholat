@@ -4,7 +4,7 @@ import {
   getSchedules,
   getVisitorApproximatelyLocation,
 } from "./utils/api";
-import createUI from "./components/UI";
+import createUI from "./views/UI";
 
 const state = {
   isLoading: true,
@@ -19,7 +19,9 @@ const init = async () => {
 
   try {
     const crudeLocation = await getVisitorApproximatelyLocation();
+
     const cityId = await getCityId(crudeLocation);
+
     const visitorInfo = await getSchedules(cityId);
 
     state.data = visitorInfo;
