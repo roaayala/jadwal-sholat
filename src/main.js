@@ -29,6 +29,23 @@ const UI = createUI({
     state.suggestions = cities;
     UI.render();
   },
+
+  onSelectCity: async (cityId) => {
+    state.suggestions = [];
+    state.isLoading = true;
+    UI.render();
+
+    try {
+      const visitorInfo = await getSchedules(cityId);
+      state.data = visitorInfo;
+    } catch (err) {
+      state.errorMessage = err.message;
+    } finally {
+      state.isLoading = false;
+      state.suggestions = null;
+      UI.render();
+    }
+  },
 });
 
 const init = async () => {

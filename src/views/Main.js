@@ -3,7 +3,7 @@ import { format, parseISO } from "date-fns";
 import { id } from "date-fns/locale";
 import createSearchBar from "./components/SearchBar";
 
-export default function createMain({ state, onSearchInput }) {
+export default function createMain({ state, onSearchInput, onSelectCity }) {
   const main = document.createElement("main");
   main.className =
     "flex-1 flex flex-col items-center justify-center gap-4 px-4 ";
@@ -23,6 +23,10 @@ export default function createMain({ state, onSearchInput }) {
     state,
     onSearchInput: (e) => {
       onSearchInput(e);
+    },
+
+    onSelectCity: (cityId) => {
+      onSelectCity(cityId);
     },
   });
 

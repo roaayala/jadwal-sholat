@@ -1,7 +1,7 @@
 import createFooter from "./Footer";
 import createMain from "./Main";
 
-export default function createUI({ state, onSearchInput }) {
+export default function createUI({ state, onSearchInput, onSelectCity }) {
   const app = document.getElementById("app");
   app.className = "flex flex-col min-h-screen";
 
@@ -12,6 +12,9 @@ export default function createUI({ state, onSearchInput }) {
       state,
       onSearchInput: (e) => {
         onSearchInput(e);
+      },
+      onSelectCity: (cityId) => {
+        onSelectCity(cityId);
       },
     });
 

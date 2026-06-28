@@ -2,7 +2,11 @@ import { capitalizeLetter } from "../../utils/helpers";
 import createButton from "./Button";
 import createTextInput from "./TextInput";
 
-export default function createSearchBar({ state, onSearchInput }) {
+export default function createSearchBar({
+  state,
+  onSearchInput,
+  onSelectCity,
+}) {
   const searchBar = document.createElement("div");
   searchBar.className = "w-full ";
 
@@ -27,32 +31,34 @@ export default function createSearchBar({ state, onSearchInput }) {
 
   searchInputGroup.append(searchInput, searchButton);
 
+  searchBar.append(searchInputGroup);
+
   if (Array.isArray(state.suggestions)) {
     const searchResult = document.createElement("div");
 
-    if (state.suggestions !== null) {
-      const suggestionList = document.createElement("ul");
+    const suggestionList = document.createElement("ul");
 
-      if (state.suggestions.length === 0) {
-        const notFoundItem = document.createElement("li");
-        notFoundItem.textContent = "Lokasi tidak ditemukan";
+    if (state.suggestions.length === 0) {
+      const notFoundItem = document.createElement("li");
+      notFoundItem.textContent = "Lokasi tidak ditemukan";
 
-        suggestionList.append(notFoundItem);
-      } else {
-        state.suggestions.forEach((city) => {
-          const listItem = document.createElement("li");
-          listItem.textContent = capitalizeLetter(city.lokasi);
+      suggestionList.append(notFoundItem);
+    } else {
+      state.suggestions.forEach((city) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = capitalizeLetter(city.lokasi);
 
-          suggestionList.append(listItem);
+        listItem.addEventListener("click", () => {
+          onSelectCity(city.id);
         });
-      }
-      searchResult.append(suggestionList);
+
+        suggestionList.append(listItem);
+      });
     }
 
+    searchResult.append(suggestionList);
     searchBar.append(searchResult);
   }
-
-  searchBar.append(searchInputGroup);
 
   return searchBar;
 }
