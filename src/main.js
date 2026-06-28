@@ -16,9 +16,7 @@ const state = {
 
 const UI = createUI({
   state,
-  onSearchInput: async (e) => {
-    const keyword = e.target.value.trim();
-
+  onSearchInput: async (keyword) => {
     if (!keyword) {
       state.suggestions = null;
       UI.render();

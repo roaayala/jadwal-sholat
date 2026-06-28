@@ -17,15 +17,15 @@ export default function createSearchBar({
     placeholder: "Tulis lokasi anda",
     className: "",
     value: "",
-    onSearchInput: (e) => {
-      onSearchInput(e);
+    onSearchInput: (keyword) => {
+      onSearchInput(keyword);
     },
   });
 
   const searchButton = createButton({
     text: "Search",
     onClickFn: () => {
-      console.log(document.getElementById("citySearch").value);
+      onSearchInput(document.getElementById("citySearch").value.trim());
     },
   });
 

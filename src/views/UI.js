@@ -10,8 +10,8 @@ export default function createUI({ state, onSearchInput, onSelectCity }) {
 
     const main = createMain({
       state,
-      onSearchInput: (e) => {
-        onSearchInput(e);
+      onSearchInput: (keyword) => {
+        onSearchInput(keyword);
       },
       onSelectCity: (cityId) => {
         onSelectCity(cityId);

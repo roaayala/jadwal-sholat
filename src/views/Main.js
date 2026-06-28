@@ -21,8 +21,8 @@ export default function createMain({ state, onSearchInput, onSelectCity }) {
 
   const searchBar = createSearchBar({
     state,
-    onSearchInput: (e) => {
-      onSearchInput(e);
+    onSearchInput: (keyword) => {
+      onSearchInput(keyword);
     },
 
     onSelectCity: (cityId) => {
