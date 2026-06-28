@@ -25,8 +25,6 @@ const UI = createUI({
 
     if (keyword === "indonesia") keyword = "Jakarta";
 
-    console.log(keyword);
-
     const cities = await searchCities(keyword);
     state.suggestions = cities;
     UI.render();

@@ -1,5 +1,5 @@
-import { capitalizeLetter } from "../../utils/helpers";
 import createButton from "./Button";
+import createSearchResult from "./SearchResult";
 import createTextInput from "./TextInput";
 
 export default function createSearchBar({
@@ -11,11 +11,12 @@ export default function createSearchBar({
   searchBar.className = "w-full ";
 
   const searchInputGroup = document.createElement("div");
+  searchInputGroup.className = "flex gap-2 items-center";
 
   const searchInput = createTextInput({
     id: "citySearch",
     placeholder: "Tulis lokasi anda",
-    className: "",
+    className: "flex-1 border px-2 py-1 rounded-lg",
     value: "",
     onSearchInput: (keyword) => {
       onSearchInput(keyword.toLowerCase());
@@ -24,6 +25,8 @@ export default function createSearchBar({
 
   const searchButton = createButton({
     text: "Search",
+    className:
+      "px-2 py-1 text-white bg-green-600 border rounded-lg border-green-600",
     onClickFn: () => {
       onSearchInput(
         document.getElementById("citySearch").value.trim().toLowerCase(),
@@ -36,29 +39,11 @@ export default function createSearchBar({
   searchBar.append(searchInputGroup);
 
   if (Array.isArray(state.suggestions)) {
-    const searchResult = document.createElement("div");
+    const searchResult = createSearchResult({
+      searchSuggestions: state.suggestions,
+      onSelectCity,
+    });
 
-    const suggestionList = document.createElement("ul");
-
-    if (state.suggestions.length === 0) {
-      const notFoundItem = document.createElement("li");
-      notFoundItem.textContent = "Lokasi tidak ditemukan";
-
-      suggestionList.append(notFoundItem);
-    } else {
-      state.suggestions.forEach((city) => {
-        const listItem = document.createElement("li");
-        listItem.textContent = capitalizeLetter(city.lokasi);
-
-        listItem.addEventListener("click", () => {
-          onSelectCity(city.id);
-        });
-
-        suggestionList.append(listItem);
-      });
-    }
-
-    searchResult.append(suggestionList);
     searchBar.append(searchResult);
   }
 
