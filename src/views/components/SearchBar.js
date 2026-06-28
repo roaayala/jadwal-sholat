@@ -8,7 +8,7 @@ export default function createSearchBar({
   onSelectCity,
 }) {
   const searchBar = document.createElement("div");
-  searchBar.className = "w-full ";
+  searchBar.className = "w-full relative";
 
   const searchInputGroup = document.createElement("div");
   searchInputGroup.className = "flex gap-2 items-center";
@@ -16,7 +16,8 @@ export default function createSearchBar({
   const searchInput = createTextInput({
     id: "citySearch",
     placeholder: "Tulis lokasi anda",
-    className: "flex-1 border px-2 py-1 rounded-lg",
+    className:
+      "flex-1 border px-4 py-2 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-shadow",
     value: "",
     onSearchInput: (keyword) => {
       onSearchInput(keyword.toLowerCase());
@@ -24,9 +25,9 @@ export default function createSearchBar({
   });
 
   const searchButton = createButton({
-    text: "Search",
+    text: "Cari",
     className:
-      "px-2 py-1 text-white bg-green-600 border rounded-lg border-green-600",
+      "px-4 py-2 text-white bg-green-600 border rounded-lg border-green-600",
     onClickFn: () => {
       onSearchInput(
         document.getElementById("citySearch").value.trim().toLowerCase(),
