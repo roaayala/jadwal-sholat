@@ -12,7 +12,31 @@ const state = {
   errorMessage: null,
 };
 
-const UI = createUI(state);
+const UI = createUI({
+  state,
+  onSearchFn: async (e) => {
+    const keyword = e.target.value.trim();
+
+    if (!keyword) return;
+
+    try {
+      state.isLoading = true;
+      UI.render();
+
+      const cityId = await getCityId(keyword);
+
+      const visitorInfo = await getSchedules(cityId);
+
+      state.data = visitorInfo;
+      state.errorMessage = null;
+    } catch (err) {
+      state.errorMessage = "Lokasi kamu ga ketemu nih";
+    } finally {
+      state.isLoading = false;
+      UI.render();
+    }
+  },
+});
 
 const init = async () => {
   UI.render();

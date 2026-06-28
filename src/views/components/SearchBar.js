@@ -1,7 +1,7 @@
 import createButton from "./Button";
 import createTextInput from "./TextInput";
 
-export default function createSearchBar() {
+export default function createSearchBar({ onSearchFn }) {
   const searchBar = document.createElement("div");
   searchBar.className = "w-full ";
 
@@ -11,13 +11,15 @@ export default function createSearchBar() {
     className: "",
     value: "",
     onSearchFn: (e) => {
-      console.log(e.target.value);
+      onSearchFn(e);
     },
   });
 
   const searchButton = createButton({
     text: "Search",
-    onClickFn: () => {},
+    onClickFn: () => {
+      console.log(document.getElementById("citySearch").value);
+    },
   });
 
   searchBar.append(searchInput, searchButton);

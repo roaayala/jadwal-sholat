@@ -3,7 +3,7 @@ import { format, parseISO } from "date-fns";
 import { id } from "date-fns/locale";
 import createSearchBar from "./components/SearchBar";
 
-export default function createMain(state) {
+export default function createMain({ state, onSearchFn }) {
   const main = document.createElement("main");
   main.className =
     "flex-1 flex flex-col items-center justify-center gap-4 px-4 ";
@@ -19,7 +19,11 @@ export default function createMain(state) {
     return main;
   }
 
-  const searchBar = createSearchBar();
+  const searchBar = createSearchBar({
+    onSearchFn: (e) => {
+      onSearchFn(e);
+    },
+  });
 
   const mainHeader = document.createElement("header");
   mainHeader.className = "w-full";
